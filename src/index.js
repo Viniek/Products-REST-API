@@ -1,5 +1,6 @@
 import express from 'express';
 import productsRouter from './routes/products.routes.js';
+import pool from './db.config.js';
 const app=express();
 
 

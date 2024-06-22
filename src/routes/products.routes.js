@@ -1,10 +1,22 @@
 import { Router } from 'express';
 const router = Router();
 
-router.get("/",(req,res)=>{
-    res.send("Getting all products...")
+router.get("/",async(req,res)=>{
+  try{
+    const result= await  pool.query("SELECT * FROM products");
+    res.status(200).json({success: true,data:result.rows}); 
+} catch(err){
+    res.status(500).json({sucsess:false,message:err.message})
+  }
 })
-router.get("/:id",(req,res)=>{
+router.get("/:id",async(req,res)=>{
+    const id=req. params.id;
+    try{
+        await pool.query('SELECT * FROM products WHERE id=$1",[id]');
+    } 
+    catch(err){
+        res.status(500).json({success:false,messsage:err.message});
+    }
     res.send("getting a single product...")
 })
 router.post("/",(req,res)=>{

@@ -76,4 +76,11 @@ router.delete("/:id", async (req, res) => { // Implemented delete functionality
   }
 });
 
-export default router;
+export default router;|
+
+# 	"product_thumbnail":"http://dummyimage.com/56x75.png/5fa2dd/ffffff", 
+				"product_title": "Pastry - key Limepoppy Seed tea",
+			"product_description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+			"product_cost": "$1.99",
+			"on_offer": "false"
+}

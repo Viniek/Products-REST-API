@@ -29,8 +29,23 @@ router.get("/:id",async(req,res)=>{
     // res.send("getting a single product...")
 })
 // Creating all products
-router.post("/",(req,res)=>{
-    res.send("creating a product....")
+router.post("/",async(req,res)=>{
+    try{
+        const product_thumbnail=req.body.product_thumbnail;
+        const product_title=req.body.product_title;
+        const product_description=req.body.product_description;
+        const product_cost=req.body.product_cost;
+        const on_offer=req.body.on_offer;
+        const insert=await pool.query("INSERT INTO products (product_thumbnail, product_title,product_description,product_cost,on_offer)VALUES($1,$2,$3,$4,$5)",[product_thumbnail,product_title,product_description,product_cost,on_offer]);
+        res.send(insert)
+    
+        if (insert.rowCount=== 1){
+            res.status(201).json({success:true, message:"user created succesfully"});
+        }
+    }
+    catch(err){
+      res.status(500).json({success:false,message:err.message})  
+    }
 })
 // Updating a single product
 router.patch("/:id",(req,res)=>{

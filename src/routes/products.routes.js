@@ -68,10 +68,34 @@ router.post("/",validateProductInformation,async(req,res)=>{
     }
 })
 // Updating a single product
-router.patch("/:id",(req,res)=>{
-    res.send("Updating a single product...")
+router.patch("/:id",async(req,res)=>{
+    const{product_thumbnail,product_title,product_description,product_cost,on_offer}=req.body;
+    const id=req.params.id;
+    
+    try{
+        let updateOperation;
+        if(product_thumbnail){
+        updateOperation=await pool.query("UPDATE products SET product_thumbnail=$1 WHERE id=$2",[product_thumbnail,id]);
+        }
+        if(product_title){
+            updateOperation=await pool.query("UPDATE products SET product_title=$1 WHERE id=$2",[product_title,id]);
+            }
+            if(product_description){
+                updateOperation=await pool.query("UPDATE products SET product_description=$1 WHERE id=$2",[product_description,id]);
+                }
+                if(product_thumbnail){
+                    updateOperation=await pool.query("UPDATE products SET product_thumbnail=$1 WHERE id=$2",[product_thumbnail,id]);
+                    }
+                    if(product_thumbnail){
+                        updateOperation=await pool.query("UPDATE products SET product_thumbnail=$1 WHERE id=$2",[product_thumbnail,id]);
+                        }
+        res.json(updateOperation);
+    }catch (err){
+        res.status(500).json({success:false, mesage: err.message});
+    }
+    // res.send("Updating a single product...")
 })
-// Deleting a single product
+// Deleting a single product 
 router.delete("/:id",async(req,res)=>{
 const id=req.params.id;
 try{

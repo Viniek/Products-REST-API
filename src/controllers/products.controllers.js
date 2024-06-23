@@ -42,7 +42,7 @@ export const createProduct =async(req,res)=>{
         // res.send(insert)
     
         if (insert.rowCount=== 1){
-            res.status(201).json({success:true, message:"user created succesfully"});
+            res.status(201).json({success:true, message:"wohoo! product created succesfully"});
         }
     }
     catch(err){
@@ -72,9 +72,9 @@ export const updateProduct=async(req,res)=>{
                         updateOperation=await pool.query("UPDATE products SET on_offer=$1 WHERE id=$2",[on_offer,id]);
                         }
                         if(updateOperation.rowCount==1){
-                            res.status(201).json({success:true,message:"hureey!! Update successfull..."});
+                            res.status(201).json({success:true,message:"wohoo! Update successfull..."});
                         }else{
-                            res.status(400).json({success:false,message:"Sorry,couldnt update product.."});
+                            res.status(400).json({success:false,message:"ooops!,couldnt update product.."});
                         }
         res.json(updateOperation);
     }catch (err){
@@ -88,9 +88,9 @@ export const deleteProduct=async(req,res)=>{
     try{
         const deleteOperation=await pool.query("DELETE FROM products WHERE id=$1",[id]);
         if (deleteOperation.rowCount ==1){
-            res.status(200).json({success:true, message: "Product deleted successfully"})
+            res.status(200).json({success:true, message: "wohoo!Product deleted successfully"})
         }else{
-            res.status(400).json({success:false, message: "Enter a valid product"})
+            res.status(400).json({success:false, message: "oops! invalid product"})
         }
     }catch(err){
         res.status(500).json({success:false,message:err.message});
